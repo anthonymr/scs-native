@@ -5,8 +5,10 @@
   "private": true,
   "dependencies": {
     "@nativescript/core": "~8.5.0",
+    "nativescript-clipboard": "^2.1.1",
     "nativescript-drop-down": "^6.0.2",
-    "nativescript-vue": "~2.9.0"
+    "nativescript-vue": "~2.9.0",
+    "vue-clipboard3": "^2.0.0"
   },
   "devDependencies": {
     "@nativescript/preview-cli": "1.0.2",

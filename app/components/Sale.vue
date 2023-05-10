@@ -15,6 +15,7 @@
           class="borded"
           keyboardType="number"
           @returnPress="qtyChanged"
+          @blur="qtyChanged"
         />
         <TextField
           v-model="usd"
@@ -22,6 +23,7 @@
           class="borded"
           keyboardType="number"
           @returnPress="usdChanged"
+          @blur="usdChanged"
         />
         <TextField
           v-model="bs"
@@ -29,18 +31,25 @@
           class="borded"
           keyboardType="number"
           @returnPress="bsChanged"
+          @blur="bsChanged"
         />
         <Button text="+" class="borded btn" @tap="addToCart" />
       </FlexboxLayout>
+
+      <FlexboxLayout flexDirection="column" class="container2">
+        <ListView for="item in cart">
+          <v-template>
+            <FlexboxLayout>
+              <Label :text="item.name" class="list-item list-name" />
+              <Label :text="item.qty" class="list-item list-qty" />
+              <Label :text="item.usd" class="list-item list-usd" />
+              <Label :text="item.bs" class="list-item list-bs" />
+              <Button text="-" class="borded btn btn-small" />
+            </FlexboxLayout>
+          </v-template>
+        </ListView>
+      </FlexboxLayout>
     </FlexboxLayout>
-    <ListView for="item in cart">
-      <v-template>
-        <Label :text="item.name" />
-        <Label :text="item.qty" />
-        <Label :text="item.usd" />
-        <Label :text="item.bs" />
-      </v-template>
-    </ListView>
   </Page>
 </template>
 
@@ -64,6 +73,8 @@ export default {
 
   methods: {
     addToCart() {
+      if (!this.bs || !this.usd || !this.qty) return;
+
       this.cart.push({
         name: 'Testing',
         bs: this.bs,
@@ -148,6 +159,14 @@ export default {
   background-color: rgb(18, 18, 18);
 }
 
+.container {
+  height: 100%;
+}
+
+.container2 {
+  background-color: green;
+}
+
 .borded {
   border-width: 1px;
   border-color: gray;
@@ -166,5 +185,28 @@ export default {
   width: 16%;
   background-color: white;
   color: black;
+}
+
+.btn.btn-small {
+  width: 8%;
+  line-height: 120px !important;
+}
+
+.list-item {
+  line-height: 120px;
+  font-size: 14px;
+  padding: 10px;
+}
+.list-name {
+  width: 24%;
+}
+.list-qty {
+  width: 20%;
+}
+.list-bs {
+  width: 20%;
+}
+.list-usd {
+  width: 20%;
 }
 </style>

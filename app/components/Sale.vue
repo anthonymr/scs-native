@@ -37,14 +37,18 @@
       </FlexboxLayout>
 
       <FlexboxLayout flexDirection="column" class="container2">
-        <ListView for="item in cart">
+        <ListView for="(item, index) in cart">
           <v-template>
             <FlexboxLayout>
               <Label :text="item.name" class="list-item list-name" />
               <Label :text="item.qty" class="list-item list-qty" />
               <Label :text="item.usd" class="list-item list-usd" />
               <Label :text="item.bs" class="list-item list-bs" />
-              <Button text="-" class="borded btn btn-small" />
+              <Button
+                text="-"
+                class="borded btn btn-small"
+                @tap="removeFromCart(index)"
+              />
             </FlexboxLayout>
           </v-template>
         </ListView>
@@ -72,6 +76,9 @@ export default {
   },
 
   methods: {
+    removeFromCart(index) {
+      this.cart.splice(index, 1);
+    },
     addToCart() {
       if (!this.bs || !this.usd || !this.qty) return;
 
@@ -164,7 +171,7 @@ export default {
 }
 
 .container2 {
-  background-color: green;
+  color: white;
 }
 
 .borded {
@@ -198,15 +205,15 @@ export default {
   padding: 10px;
 }
 .list-name {
-  width: 24%;
+  width: 41%;
 }
 .list-qty {
-  width: 20%;
+  width: 17%;
 }
 .list-bs {
-  width: 20%;
+  width: 17%;
 }
 .list-usd {
-  width: 20%;
+  width: 17%;
 }
 </style>
